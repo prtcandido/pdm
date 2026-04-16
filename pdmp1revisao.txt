@@ -1,0 +1,274 @@
+
+const obj = {a:123,b:"prova",c:[10,-3,2],d:function(x){return x+1}}
+
+Para executar a função:
+
+1a forma
+console.log(   obj.d(10)  )
+
+2a forma
+const { d:f } = obj
+console.log(   f(10)   )
+
+Como escrever na console o valor da segunda posição do vetor?
+const { c:abc } = obj
+console.log( abc[1] )
+
+----------
+
+const f = function(a,b){return a+b}
+
+const g = (a,b) => {return a+b}
+
+const g = (a,b) => a+b
+
+console.log(  g(2,3)  )
+
+-----------
+
+const a = {x:10,y:20}
+
+const b = {...a,z:30}
+
+const b = {x:10,y:20,z:30}
+
+Qual o valor em c?
+const c = {...a,x:11}
+
+Resolução
+const c = {x:10,y:20,x:11}
+const c = {y:20,x:11} // 1a ocorrencia de x é descartada
+
+------------
+
+Qual é o conteúdo de y?
+
+const x = ["Joao","Maria","Carlos"]
+const y = x.map(  (a) => a.length   )
+
+Resposta:
+[ 4 ,  5   ,  6 ]
+
+OBS: VER TAMBÉM REDUCE E FILTER.
+
+---------------
+React
+=====
+Hook (ver exemplohook.zip)
+====
+
+const [nome,setNome] = useState("Joao")
+
+Para que serve o useState?
+
+Resp.
+Para preservar dados no componente (estado) mesmo que  
+o componente seja renderizado
+
+O que ocorre com o componente se um useState for modificado?
+
+Resp.
+O componente será novamente renderizado (código reexecutado)
+
+Como alterar o valor do useState "nome" para "Maria"
+Resp.:
+setNome("Maria")
+
+-----------
+
+Qual é diferença principal entre useState e useRef?
+Mudanças no useRef não causam a renderização do componente.
+
+----------
+Caso 1
+useEffect( função , [] )
+
+Dado o useEffect acima em um componente, quando a função será executada? 
+
+Apenas 1 vez na carga do componente.
+
+Caso2
+useEffect( função , [a,b,c] )
+
+Dado o useEffect acima em um componente, quando a função será executada? 
+
+Na carga do componente e se houver mudança em a,b ou c.
+
+-----------------
+
+Como crir projeto expo?
+
+npx create-expo-app exemplo 
+
+----------
+
+Rotas
+=====
+
+O que é rota? 
+
+Mapeamento ou endereço (URL) de uma tela. Dentro da pasta app
+
+Rota para inserir um novo produto
+produto/create
+produto/delete/23
+
+-----------
+
+FlatList é um componente para listas 
+
+        data={listaProduto}  // vetor de objetos
+        keyExtractor={(item) => item.id.toString()} // chave
+        renderItem={({ item }) => ( ...  // apresentação dos dados
+
+-------------
+
+Navegação entre páginas:
+
+const router = useRouter()
+
+Quais são as operações do useRouter()
+
+router.push(rota) - navega e empilha nova página
+
+router.back() - desempilha voltando para a página anterior
+
+router.replace(rota) - substitui a que página no topo da pilha
+
+----------------
+
+Sobre o useQuery
+
+Qual a vantagem do seu uso em relação a progração com useState e
+useEffect?
+
+Resp.: Controles automáticos de carregados dos dados e manutenção
+automática de cache, facilita o tratamento de erros e resultados vazios.
+
+------
+
+Qual a diferença useQuery para useMutation?
+
+Resp.:
+useQuery é para consultas
+useMutation é para delete, insert e update
+
+------
+
+Após atualizar, inserir ou excluir itens na API, 
+qual operação é necessária
+no projeto expo para que os novos dados sejam refletidos imediatamente
+para o usuário?
+
+Resp. Invalidar os caches.
+
+Exemplo.
+queryClient.invalidateQueries({ queryKey: ["produtos"] });
+queryClient.invalidateQueries({ queryKey: ["produto", variables.id] });
+
+-------
+
+Para que serve o yup e o useForm?
+
+Com yup são definidos critérios/regras de validação dos 
+campos do formulário.
+
+userForm controla o funcionamento do formulário de entrada de dados
+
+-------
+
+O que é o Laravel?
+
+Framework PHP para aplicação Web MVC e API-REST.
+
+--------
+
+Descreva os componentes criados pelo comando abaixo:
+
+php artisan make:model Produto --controller --migration
+
+Model: classes de objetos com os dados do negócio. 
+       objetos persistentes.
+
+Qual padrão do Larevel para nome de tabela? Nome do model no plural.
+
+Controller: classes onde estão as funções associadas as requisições
+       (rotas) dos clientes
+
+Migration: código PHP para modificar a estrutura do banco de dados
+        cria tabela, elimina tabela , adiciona coluna
+        , adiciona restrição (chave estrangeira, por exemplo)
+
+------
+
+Rotas de API
+
+Em qual arquivo são definidas as rotas de API?
+
+routes\api.php
+
+Quais são as rotas para produtos?
+
+Consultando todos os produtos
+GET
+localhost:8000/api/produtos
+Associada a função index do controller
+
+Consultando um produto específico
+GET
+localhost:8000/api/produtos/53
+Associada a função show do controller
+
+Inserir um novo produto
+POST
+localhost:8000/api/produtos
+Associada a função store do controller
+Deve ser enviado pelo cliente json do novo produto
+
+Alterar um produto
+PUT
+localhost:8000/api/produtos/53
+Associada a função update do controller
+Deve ser enviado pelo cliente json com os dados alterados
+
+Excluir um produto
+DELETE
+localhost:8000/api/produtos/53
+Associada a função destroy do controller
+
+-------
+
+Operações com o banco de dados.
+
+Qual compenente é usado para interagir com BD?
+
+Resp.: Model.
+
+Ler/recuperar do BD todos os produtos cadastrados.
+
+Produto::all();
+
+Cadastrar um novo produto no BD.
+
+Produto::create( ["nome"=>"ProdX","preco"=>20.3] );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
